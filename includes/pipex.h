@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:42:53 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/23 15:07:00 by sperron          ###   ########.fr       */
+/*   Updated: 2024/08/28 16:29:50 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "../export/printf/includes/ft_printf.h"
 # include "../export/essential/essential.h"
 
-#define Syntax ""
 
 typedef struct s_pipex
 {
@@ -60,5 +59,6 @@ void	close_and_clear(int pipe[2], t_pipex **pipex);
 void	clear_and_exit(t_pipex **pipex);
 /*Pipe*/
 void	close_pipe(int fd[2]);
+void	syntax_error(char **av, int ac);
 
 #endif

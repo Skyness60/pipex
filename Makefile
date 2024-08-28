@@ -8,6 +8,7 @@ SOURCES =	srcs/project/pipex.c \
 				srcs/project/childs/wait.c \
 				srcs/project/clean/close.c \
 				srcs/project/clean/fail.c \
+				srcs/project/clean/syntax.c \
 				srcs/project/fd/child.c \
 				srcs/project/free/ft_free.c \
 				srcs/project/path/found.c \

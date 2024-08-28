@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 17:27:44 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/23 15:10:33 by sperron          ###   ########.fr       */
+/*   Updated: 2024/08/28 16:29:15 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	main(int ac, char **av, char **envp)
 		exit(status);
 	}
 	else
-		return (0);
+		return (syntax_error(av, ac), 2);
 }
