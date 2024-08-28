@@ -71,7 +71,7 @@ static char	*ft_next(char *buffer)
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (!buffer[i])
+	if (!buffer[i] || buffer)
 	{
 		free(buffer);
 		return (NULL);

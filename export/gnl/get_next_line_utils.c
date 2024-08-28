@@ -22,4 +22,3 @@ void	*ft_calloc(unsigned int count, unsigned int size)
 	ft_bzero(pointer, size * count);
 	return (pointer);
 }
-
