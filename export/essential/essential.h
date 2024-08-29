@@ -19,6 +19,8 @@ char	*ft_strncpy(char *dest, const char *src, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		is_quote(char c);
+char 	**valid(char **result, char s, int count);
+void	valid2(char **result, char s, int count, int i);
 int		is_separator(char c, char sep);
 void	count_word_spe(char *str, char sep, int *count);
 void	tab_str(char **result, char *str, char sep, int *j);

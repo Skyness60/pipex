@@ -23,6 +23,7 @@ SOURCES =	srcs/project/pipex.c \
 			export/essential/ft_ppxnew.c \
 			export/essential/ft_split.c \
 			export/essential/ft_split2.c \
+			export/essential/ft_split3.c \
 			export/essential/ft_strlen.c \
 			export/essential/ft_strchr.c \
 			export/essential/ft_strjoin.c \
@@ -64,6 +65,7 @@ BONUS_SOURCES =	srcs/bonus/pipex_bonus.c \
 			export/essential/ft_ppxnew_bonus.c \
 			export/essential/ft_split.c \
 			export/essential/ft_split2.c \
+			export/essential/ft_split3.c \
 			export/essential/ft_strlen.c \
 			export/essential/ft_strchr.c \
 			export/essential/ft_strjoin.c \

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
+/*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:14:17 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/28 06:07:04 by sperron          ###   ########.fr       */
+/*   Updated: 2024/08/29 13:48:27 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "essential.h"
+
 
 int	is_quote(char c)
 {
@@ -21,32 +22,29 @@ int	is_separator(char c, char sep)
 {
 	return (c == sep);
 }
-void valid(char **result, char s, int count, int i)
+char **valid(char **result, char s, int count)
 {
-    int j;
-    int state;
+	int	i;
+	int	j;
+	int	counter;
 
-    while (result[++i])
-    {
-        j = 0;
-        state = 0;
-        while (result[i][j])
-        {
-            if (result[i][j] == '\'')
-            {
-				j++;
-                while (result[i][j] != '\'')
-                {
-                    if (is_separator(result[i][j], s))
-                        state = 1;
-					j++;
-                }
-            }
+	i = 0;
+	counter = 0;
+	while (result[i])
+	{
+		j = 0;
+		while (result[i][j])
+		{
+			if (result[i][j] == '\'')
+				counter++;
 			j++;
-        }
-        if (state == 0)
-            remove_char_from_string(result[i], result[i], count, 0);
-    }
+		}
+		i++;
+	}
+	if (counter % 2 == 1)
+		write(2, "Bientot fix pour minishell le quote manquant\n", 45);
+	valid2(result, s, count, 0);
+	return (result);
 }
 
 char	**split_with_quotes(char *str, char sep)
@@ -65,7 +63,7 @@ char	**split_with_quotes(char *str, char sep)
 	j = 0;
 	tab_str(result, str, sep, &j);
 	result[j] = NULL;
-	valid(result, ' ', count, 0);
+	result = valid(result, ' ', count);
 	if (!result)
 		free(result);
 	return (result);
