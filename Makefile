@@ -48,6 +48,7 @@ BONUS_SOURCES =	srcs/bonus/pipex_bonus.c \
 				srcs/bonus/childs_bonus/wait_bonus.c \
 				srcs/bonus/clean_bonus/close_bonus.c \
 				srcs/bonus/clean_bonus/fail_bonus.c \
+				srcs/bonus/clean_bonus/syntax_bonus.c \
 				srcs/bonus/fd_bonus/child_bonus.c \
 				srcs/bonus/free_bonus/ft_free_bonus.c \
 				srcs/bonus/path_bonus/found_bonus.c \

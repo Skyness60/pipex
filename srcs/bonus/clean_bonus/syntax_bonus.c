@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
+/*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 13:22:37 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/31 21:31:32 by sperron          ###   ########.fr       */
+/*   Created: 2024/08/28 16:27:24 by sperron           #+#    #+#             */
+/*   Updated: 2024/08/28 16:32:06 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/pipex.h"
 
-void	close_pipe(int fd[2])
+void	syntax_error(char **av, int ac)
 {
-    if (fd[0] != -1)
-        close(fd[0]);
-    if (fd[1] != -1)
-        close(fd[1]);
+	if (ac == 1)
+	{
+		ft_printf("pipex: syntax error near unexpected token '|'\n");
+		return ;
+	}
+	ft_printf("pipex: syntax error near unexpected token '%s'\n", av[ac - 1]);	
 }

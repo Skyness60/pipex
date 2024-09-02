@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:42:53 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/28 04:20:08 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/01 20:42:43 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		fd_childs(t_pipex *node);
 /*Clean*/
 void	close_and_clear(int pipe[2], t_pipex **pipex);
 void	clear_and_exit(char **av, t_pipex **pipex);
+void	syntax_error(char **av, int ac);
 /*Pipe*/
 void	close_pipe(int fd[2]);
 /*Heredoc*/

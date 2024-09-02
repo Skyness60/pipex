@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 02:59:06 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/28 05:51:41 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/02 10:41:53 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,52 @@ static int	child_exec(int cmd_i, char **argv, char **envp, t_pipex	**pipex)
 	return (0);
 }
 
-int	middle_child(int *cmd_i, t_pipex **pipex, char **av, char **env)
+static void close_all_fds(t_pipex *pipex)
 {
-	t_pipex	*new_stack_node;
+    close(pipex->fd[0]);
+    close(pipex->fd[1]);
+    // Ajoutez ici d'autres descripteurs de fichiers spécifiques à fermer si nécessaire
+}
 
-	new_stack_node = ft_ppxnew((*cmd_i)++);
-	if (new_stack_node == NULL)
-		clear_and_exit(av, pipex);
-	ft_ppxadd_back(pipex, new_stack_node);
-	if (pipe((new_stack_node)->fd) == -1)
-		clear_and_exit(av, pipex);
-	new_stack_node->pid = fork();
-	if (new_stack_node->pid == -1)
-		clear_and_exit(av, pipex);
-	if (new_stack_node->pid == 0)
-	{
-		if (fd_childs(new_stack_node) == -1)
-			return (ft_ppxclear(pipex), -1);
-		if (child_exec(new_stack_node->cmd_i, av, env, pipex) == -1)
-			return (close_and_clear(new_stack_node->fd, pipex), -1);
-	}
-	if (dup2(new_stack_node->fd[0], STDIN_FILENO) == -1)
-		return (close_and_clear(new_stack_node->fd, pipex), -1);
-	return (close_pipe(new_stack_node->fd), new_stack_node->status);
+static void free_pipex(t_pipex *pipex)
+{
+    t_pipex *temp;
+
+    while (pipex)
+    {
+        temp = pipex;
+        pipex = pipex->next;
+        free(temp);
+    }
+}
+
+
+int middle_child(int *cmd_i, t_pipex **pipex, char **av, char **env)
+{
+    t_pipex *new_stack_node;
+
+    new_stack_node = ft_ppxnew((*cmd_i)++);
+    if (new_stack_node == NULL)
+        clear_and_exit(av, pipex);
+    ft_ppxadd_back(pipex, new_stack_node);
+    if (pipe((new_stack_node)->fd) == -1)
+        clear_and_exit(av, pipex);
+    new_stack_node->pid = fork();
+    if (new_stack_node->pid == -1)
+        clear_and_exit(av, pipex);
+    if (new_stack_node->pid == 0)
+    {
+        close_all_fds(*pipex); // Fermer les descripteurs de fichiers spécifiques
+        if (fd_childs(new_stack_node) == -1)
+            exit(EXIT_FAILURE);
+        if (child_exec(new_stack_node->cmd_i, av, env, pipex) == -1)
+            exit(EXIT_FAILURE);
+        close(new_stack_node->fd[0]);
+        close(new_stack_node->fd[1]);
+        free_pipex(*pipex); // Libérer la mémoire allouée
+        exit(EXIT_SUCCESS);
+    }
+    close(new_stack_node->fd[0]);
+    close(new_stack_node->fd[1]);
+    return (new_stack_node->status);
 }

@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:34:53 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/28 00:17:37 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/01 03:46:50 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static int	check_cmd_null(char **av, int status, t_pipex *temp)
 {
 	if (WEXITSTATUS(status) == 2)
-		return (ft_printf("%s: %s: Permission denied\n", av[2], av[1]), 1);
+		return (ft_printf("pipex: %s: Permission denied\n", av[1]), 1);
 	if (WEXITSTATUS(status) == 1)
-		return (ft_printf("pipex: %s: No such file or directory\n", av[1]), 1);
+		return (ft_printf("pipex: %s: No such file or directory\n", av[1]), 0);
 	if (WEXITSTATUS(status) == 5)
 		return (ft_printf("pipex: %s: command not found\n", av[temp->cmd_i]));
 	if (WEXITSTATUS(status) == 127)
 		return (ft_printf("pipex: %s: command not found\n", av[temp->cmd_i]),
 			127);
 	if (WEXITSTATUS(status) == 4)
-		return (ft_printf("%s: %s: Permission denied\n", av[3], av[4]), 1);
+		return (ft_printf("pipex: %s: Permission denied\n", av[4]), 1);
 	return (WEXITSTATUS(status));
 }
 

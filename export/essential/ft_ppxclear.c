@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ppxclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:49:57 by sperron           #+#    #+#             */
-/*   Updated: 2024/08/22 12:57:59 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/01 15:18:36 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 void	ft_ppxclear(t_pipex **pipex)
 {
-	if (!pipex || !(*pipex))
+	t_pipex	*temp;
+
+	if (!pipex || !*pipex)
 		return ;
-	if ((*pipex)->next)
-		ft_ppxclear((&(*pipex)->next));
-	free(*pipex);
+	while (*pipex != NULL)
+	{
+		temp = (*pipex)->next;
+		free(*pipex);
+		*pipex = temp;
+	}
+	return ;
 }
