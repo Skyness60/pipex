@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ppx.c                                              :+:      :+:    :+:   */
+/*   ppx_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 00:38:59 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 16:22:29 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/04 16:47:03 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex.h"
+#include "../../includes/pipex_bonus.h"
 
 t_ppx	*ppx_new(char **envp)
 {
@@ -65,4 +65,11 @@ void	ppx_del(t_ppx **ppx)
 		temp = save;
 	}
 	*ppx = NULL;
+}
+
+t_ppx	*last_pip(t_ppx *ppx)
+{
+	while (ppx->next)
+		ppx = ppx->next;
+	return (ppx);
 }

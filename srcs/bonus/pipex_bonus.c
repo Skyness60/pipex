@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 22:34:58 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 15:46:18 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/04 17:54:09 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex.h"
+#include "../../includes/pipex_bonus.h"
 
 void	ft_free_strs(char **strs)
 {
@@ -44,24 +44,30 @@ int	ppx_error(t_error_code code, char **av, int ac, char *cmd)
 		return (ft_dprintf(2, "pipex: pipe failure\n"), 1);
 	else if (code == ERR_FORK_FAILURE)
 		return (ft_dprintf(2, "pipex: fork failure\n"), 1);
+	else if (code == ERR_HEREDOC)
+		return (ft_dprintf(2, "pipex: fork failure\n"), 1);
 	else
 		return (ft_dprintf(2, "pipex: unknown error\n"), 1);
 }
 
-void	take_path_exec(char **av, char **envp, t_ppx *ppx)
+int	take_path_exec(char **av, char **envp, t_ppx *ppx, int i)
 {
-	int	i;
-
-	i = 4;
 	if (ppx_add_back(&ppx, ppx_new(envp)) == -1)
-		return ;
+		return (0);
 	if (pipe(ppx->pipe_fd) == -1)
-		return (ppx_error(ERR_PIPE_FAILURE, av, 0, 0), ppx_del(&ppx));
+		return (ppx_error(ERR_PIPE_FAILURE, av, 0, 0), ppx_del(&ppx), 0);
 	exec_child_first(ppx, av[2], av[1]);
-	exec_child_last(ppx, av[i - 1], av[i]);
+	while (av[i + 1])
+	{
+		i = middle_cmd(&ppx, i, envp, av);
+		if (i == -1)
+			return (ppx_del(&ppx), 0);
+	}
+	exec_child_last(ppx, av[i - 1], av[i], false);
 	close(ppx->pipe_fd[0]);
 	close(ppx->pipe_fd[1]);
 	ppx_del(&ppx);
+	return (i);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -72,11 +78,17 @@ int	main(int ac, char **av, char **envp)
 	int		exit_status;
 	int		child_status;
 
-	i = 4;
-	if (ac != 5)
+	i= 4;
+	status = 0;
+	if (ac < 5)
 		return (ppx_error(1, av, ac, 0), 2);
 	ppx = NULL;
-	take_path_exec(av, envp, ppx);
+	if (ft_strncmp(av[1], "here_doc", 9) == 0 && ac > 5)
+		creat_here_doc_take_path_exec(av, envp);
+	else if (ft_strncmp(av[1], "here_doc", 9) != 0)
+		i = take_path_exec(av, envp, ppx, i);
+	else
+		return (ppx_error(6, av, ac, 0), 1);
 	while (i > 2)
 	{
 		wait(&status);

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
+/*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:14:17 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 00:51:39 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/04 11:26:47 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 int	is_quote(char c)
 {
@@ -22,7 +21,8 @@ int	is_separator(char c, char sep)
 {
 	return (c == sep);
 }
-char **valid(char **result, char s, int count)
+
+char	**valid(char **result, char s, int count)
 {
 	int	i;
 	int	j;
@@ -42,7 +42,10 @@ char **valid(char **result, char s, int count)
 		i++;
 	}
 	if (counter % 2 == 1)
-		write(2, "Bientot fix pour minishell le quote manquant\n", 45);
+	{
+		if (i > 0)
+			result[i - 1] = prompt_command(result[i - 1]);
+	}
 	valid2(result, s, count, 0);
 	return (result);
 }
@@ -71,7 +74,6 @@ char	**split_with_quotes(char *str, char sep)
 //int main() {
 //    char *test_str = "grep 'line' ' ' 'ta'";
 //    char **result = split_with_quotes(test_str, ' ');
-    
 //    for (int i = 0; result[i]; i++) {
 //        printf("Part %d: %s\n", i, result[i]);
 //        free(result[i]);

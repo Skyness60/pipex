@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.c                                      :+:      :+:    :+:   */
+/*   redirection_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 01:08:03 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 17:19:56 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/04 17:18:25 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex.h"
+#include "../../includes/pipex_bonus.h"
 
 int	file_to_pipe(char *file, t_ppx *ppx)
 {
@@ -26,7 +26,7 @@ int	file_to_pipe(char *file, t_ppx *ppx)
 	return (1);
 }
 
-int	pipe_to_file(char *file, t_ppx *ppx, bool heredoc)
+int	pipe_to_file(char *file, t_ppx *ppx)
 {
 	int	file_fd;
 
@@ -38,4 +38,11 @@ int	pipe_to_file(char *file, t_ppx *ppx, bool heredoc)
 	close_pipe(ppx);
 	close(file_fd);
 	return (1);
+}
+
+void	pipe_to_pipe(int pipe_fd_1[2], int pipe_fd_2[2], t_ppx *ppx)
+{
+	dup2(pipe_fd_1[0], STDIN_FILENO);
+	dup2(pipe_fd_2[1], STDOUT_FILENO);
+	close_pipe(ppx);
 }

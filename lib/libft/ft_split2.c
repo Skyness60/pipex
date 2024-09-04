@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
+/*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 14:13:28 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 00:51:33 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/04 11:28:36 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ size_t	get_word_len(char *str, char sep)
 	}
 	return (len);
 }
-
 
 void	count_word_spe(char *str, char sep, int *count)
 {
@@ -73,26 +72,27 @@ void	tab_str(char **result, char *str, char sep, int *j)
 	}
 }
 
-void remove_char_from_string(char *read, char *write, char char_to_remove, int i)
+void	remove_char_from_string(char *read, char *write, char char_to_remove,
+			int i)
 {
-    int in_quotes;
+	int	in_quotes;
 
 	in_quotes = 0;
-    while (read[i] != '\0')
+	while (read[i] != '\0')
 	{
-        if (is_quote(read[i]))
+		if (is_quote(read[i]))
 		{
-            if (in_quotes)
-                in_quotes = 0;
+			if (in_quotes)
+				in_quotes = 0;
 			else
-                in_quotes = 1;
-        }
+				in_quotes = 1;
+		}
 		else
 		{
-            if (read[i] != char_to_remove || in_quotes)
-                *write++ = read[i];
-        }
-        	i++;
-    }
-    *write = '\0';
+			if (read[i] != char_to_remove || in_quotes)
+				*write++ = read[i];
+		}
+		i++;
+	}
+	*write = '\0';
 }

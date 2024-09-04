@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 10:12:52 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 11:33:24 by sperron          ###   ########.fr       */
+/*   Created: 2024/05/20 13:47:19 by sperron           #+#    #+#             */
+/*   Updated: 2024/05/23 15:38:53 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *str, int n)
+void	ft_bzero(void *s, size_t n)
 {
-	char	*dup;
+	size_t	i;
 
-	dup = (char *)malloc(n + 1);
-	if (!dup)
-		return (NULL);
-	ft_strncpy(dup, str, n);
-	dup[n] = '\0';
-	return (dup);
+	i = 0;
+	while (i < n)
+	{
+		*(char *)(s + i) = 0;
+		i++;
+	}
 }

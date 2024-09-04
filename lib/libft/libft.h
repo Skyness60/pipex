@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sperron <sperron@student>                  +#+  +:+       +#+        */
+/*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 22:41:47 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 01:26:01 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/04 16:48:31 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,21 @@
 # include <sys/utsname.h>
 # include <sys/socket.h>
 # include <sys/select.h>
-
+# include <stdbool.h>
+# include "../lib.h"
 
 int		is_quote(char c);
 int		is_separator(char c, char sep);
-char 	**valid(char **result, char s, int count);
+char	**valid(char **result, char s, int count);
 char	**ft_split(char const *s, char c);
 char	**split_with_quotes(char *str, char sep);
+char	*prompt_command(char *result);
 size_t	get_word_len(char *str, char sep);
+char	*ft_strcpy(char *dest, char *src);
 void	count_word_spe(char *str, char sep, int *count);
 void	tab_str(char **result, char *str, char sep, int *j);
-void 	remove_char_from_string(char *read, char *write, char char_to_remove, int i);
+void	remove_char_from_string(char *read, char *write, char char_to_remove,
+			int i);
 void	valid2(char **result, char s, int count, int i);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 char	*ft_strndup(const char *str, int n);
@@ -57,4 +61,9 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_putstr_fd(char *s, int fd);
+char	*ft_strchr(const char *str, int c);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_itoa(int n);
 #endif

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 01:03:40 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 15:44:28 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/04 16:47:58 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex.h"
+#include "../../includes/pipex_bonus.h"
 
 char	*find_path(char **paths, char *cmd)
 {
@@ -71,4 +71,18 @@ char	**find_paths(char **envp)
 		return (ft_split(strdup("0"), ' '));
 	paths = ft_split(envp[i] + 5, ':');
 	return (paths);
+}
+
+int	middle_cmd(t_ppx **ppx, int i, char **envp, char **av)
+{
+	if (ppx_add_back(ppx, ppx_new(envp)) == -1)
+		return (-1);
+	*ppx = last_pip(*ppx);
+	if (pipe((*ppx)->pipe_fd) == -1)
+		return (perror("pip2"), -1);
+	exec_child_midle(*ppx, av[i - 1]);
+	close((*ppx)->prev->pipe_fd[0]);
+	close((*ppx)->prev->pipe_fd[1]);
+	i++;
+	return (i);
 }

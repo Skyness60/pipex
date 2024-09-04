@@ -6,10 +6,15 @@ SOURCES_PRINTF = lib/printf/srcs/ft_printf.c
 
 SOURCES_LIBFT = lib/libft/ft_nbrlen_base.c \
 				lib/libft/ft_nbrlen.c \
+				lib/libft/ft_bzero.c \
+				lib/libft/ft_calloc.c \
+				lib/libft/ft_strchr.c \
 				lib/libft/ft_putchar.c \
+				lib/libft/ft_strcpy.c \
 				lib/libft/ft_puthexa.c \
 				lib/libft/ft_putnbr_unsigned.c \
 				lib/libft/ft_putnbr.c \
+				lib/libft/ft_itoa.c \
 				lib/libft/ft_putpointer.c \
 				lib/libft/ft_putstr_fd.c \
 				lib/libft/ft_putstr.c \
@@ -17,6 +22,7 @@ SOURCES_LIBFT = lib/libft/ft_nbrlen_base.c \
 				lib/libft/ft_split1.c \
 				lib/libft/ft_split2.c \
 				lib/libft/ft_split3.c \
+				lib/libft/ft_substr.c \
 				lib/libft/ft_strlen.c \
 				lib/libft/ft_strncpy.c \
 				lib/libft/ft_strncmp.c \
@@ -24,57 +30,29 @@ SOURCES_LIBFT = lib/libft/ft_nbrlen_base.c \
 				lib/libft/ft_strjoin.c \
 				lib/libft/ft_strndup.c 
 
+SOURCES_GNL =	lib/gnl/get_next_line.c \
+				lib/gnl/get_next_line_utils.c
+
 SOURCES =		$(SOURCES_PRINTF) \
 				$(SOURCES_LIBFT) \
+				$(SOURCES_GNL) \
 				srcs/project/pipex.c \
 				srcs/project/pipex_utils.c \
 				srcs/project/ppx.c \
+				srcs/project/childs.c \
 				srcs/project/redirection.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
-BONUS_SOURCES =	srcs/bonus/pipex_bonus.c \
-				srcs/bonus/childs_bonus/first_bonus.c \
-				srcs/bonus/childs_bonus/middle_bonus.c \
-				srcs/bonus/childs_bonus/second_bonus.c \
-				srcs/bonus/childs_bonus/wait_bonus.c \
-				srcs/bonus/clean_bonus/close_bonus.c \
-				srcs/bonus/clean_bonus/fail_bonus.c \
-				srcs/bonus/clean_bonus/syntax_bonus.c \
-				srcs/bonus/fd_bonus/child_bonus.c \
-				srcs/bonus/free_bonus/ft_free_bonus.c \
-				srcs/bonus/path_bonus/found_bonus.c \
-				srcs/bonus/pipe_bonus/close_bonus.c \
-				srcs/bonus/utils_bonus/ft_strjoin_with_separator_bonus.c \
-				srcs/bonus/utils_bonus/ft_tablen_bonus.c \
-				srcs/bonus/utils_bonus/is_exec_bonus.c \
-				srcs/bonus/heredoc/del.c \
-				srcs/bonus/heredoc/utils.c \
-			export/essential/ft_bzero.c \
-			export/essential/ft_memmove.c \
-			export/essential/ft_itoa.c \
-			export/essential/ft_ppxadd_back_bonus.c \
-			export/essential/ft_ppxclear_bonus.c \
-			export/essential/ft_ppxnew_bonus.c \
-			export/essential/ft_split.c \
-			export/essential/ft_split2.c \
-			export/essential/ft_split3.c \
-			export/essential/ft_strlen.c \
-			export/essential/ft_strchr.c \
-			export/essential/ft_strjoin.c \
-			export/essential/ft_strlcpy.c \
-			export/essential/ft_strncmp.c \
-			export/essential/ft_strncpy.c \
-			export/essential/ft_strndup.c \
-			export/printf/srcs/ft_printf.c \
-			export/gnl/get_next_line.c \
-			export/gnl/get_next_line_utils.c \
-				export/printf/libft/ft_putchar.c \
-				export/printf/libft/ft_putnbr.c \
-				export/printf/libft/ft_putnbr_unsigned.c \
-				export/printf/libft/ft_putstr.c \
-				export/printf/libft/ft_puthexa.c \
-				export/printf/libft/ft_putpointer.c
+BONUS_SOURCES =	$(SOURCES_PRINTF) \
+				$(SOURCES_LIBFT) \
+				$(SOURCES_GNL) \
+				srcs/bonus/pipex_bonus.c \
+				srcs/bonus/pipex_utils_bonus.c \
+				srcs/bonus/ppx_bonus.c \
+				srcs/bonus/heredoc.c \
+				srcs/bonus/childs_bonus.c \
+				srcs/bonus/redirection_bonus.c
 
 BONUS_OBJECTS = $(BONUS_SOURCES:.c=.o)
 
@@ -102,7 +80,7 @@ $(NAME): $(OBJECTS) eval
 	@$(CC) $(FLAGS) $(OBJECTS) -o $(NAME)
 	@echo $(BLUE)✅ $@ built! $(NC)
 
-bonus: $(OBJECTS) $(BONUS_OBJECTS)
+bonus: $(BONUS_OBJECTS)
 	@$(CC) $(FLAGS) $(BONUS_OBJECTS) -o $(NAME)
 	@echo $(PURPLE)✅ $(NAME) with bonus built! $(NC)
 

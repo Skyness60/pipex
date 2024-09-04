@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/26 10:12:52 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 11:33:24 by sperron          ###   ########.fr       */
+/*   Created: 2024/05/21 07:12:07 by sperron           #+#    #+#             */
+/*   Updated: 2024/05/23 15:29:39 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *str, int n)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*dup;
+	void	*ptr;
+	size_t	i;
 
-	dup = (char *)malloc(n + 1);
-	if (!dup)
+	if (size != 0 && nmemb > ((size_t) -1 / size))
+	{
 		return (NULL);
-	ft_strncpy(dup, str, n);
-	dup[n] = '\0';
-	return (dup);
+	}
+	ptr = (void *)malloc(nmemb * size);
+	if (!ptr)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	i = 0;
+	while (i < (nmemb * size))
+	{
+		*(unsigned char *)(ptr + i) = 0;
+		i++;
+	}
+	return (ptr);
 }
