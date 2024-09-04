@@ -2,42 +2,34 @@ NAME = pipex
 
 CC = cc -g3
 
-SOURCES =	srcs/project/pipex.c \
-				srcs/project/childs/first.c \
-				srcs/project/childs/second.c \
-				srcs/project/childs/wait.c \
-				srcs/project/clean/close.c \
-				srcs/project/clean/fail.c \
-				srcs/project/clean/syntax.c \
-				srcs/project/fd/child.c \
-				srcs/project/free/ft_free.c \
-				srcs/project/path/found.c \
-				srcs/project/pipe/close.c \
-				srcs/project/utils/ft_strjoin_with_separator.c \
-				srcs/project/utils/ft_tablen.c \
-				srcs/project/utils/is_exec.c \
-			export/essential/ft_bzero.c \
-			export/essential/ft_memmove.c \
-			export/essential/ft_ppxadd_back.c \
-			export/essential/ft_ppxclear.c \
-			export/essential/ft_ppxnew.c \
-			export/essential/ft_split.c \
-			export/essential/ft_split2.c \
-			export/essential/ft_split3.c \
-			export/essential/ft_strlen.c \
-			export/essential/ft_strchr.c \
-			export/essential/ft_strjoin.c \
-			export/essential/ft_strlcpy.c \
-			export/essential/ft_strncmp.c \
-			export/essential/ft_strncpy.c \
-			export/essential/ft_strndup.c \
-			export/printf/srcs/ft_printf.c \
-				export/printf/libft/ft_putchar.c \
-				export/printf/libft/ft_putnbr.c \
-				export/printf/libft/ft_putnbr_unsigned.c \
-				export/printf/libft/ft_putstr.c \
-				export/printf/libft/ft_puthexa.c \
-				export/printf/libft/ft_putpointer.c
+SOURCES_PRINTF = lib/printf/srcs/ft_printf.c
+
+SOURCES_LIBFT = lib/libft/ft_nbrlen_base.c \
+				lib/libft/ft_nbrlen.c \
+				lib/libft/ft_putchar.c \
+				lib/libft/ft_puthexa.c \
+				lib/libft/ft_putnbr_unsigned.c \
+				lib/libft/ft_putnbr.c \
+				lib/libft/ft_putpointer.c \
+				lib/libft/ft_putstr_fd.c \
+				lib/libft/ft_putstr.c \
+				lib/libft/ft_split.c \
+				lib/libft/ft_split1.c \
+				lib/libft/ft_split2.c \
+				lib/libft/ft_split3.c \
+				lib/libft/ft_strlen.c \
+				lib/libft/ft_strncpy.c \
+				lib/libft/ft_strncmp.c \
+				lib/libft/ft_strdup.c \
+				lib/libft/ft_strjoin.c \
+				lib/libft/ft_strndup.c 
+
+SOURCES =		$(SOURCES_PRINTF) \
+				$(SOURCES_LIBFT) \
+				srcs/project/pipex.c \
+				srcs/project/pipex_utils.c \
+				srcs/project/ppx.c \
+				srcs/project/redirection.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -1,12 +1,9 @@
-export
-here_doc0
+in
 includes
 infile
-LANGUAGE=en_US:en
-ls
+lib
 Makefile
 out
 outfile
 pipex
-saddasd
 srcs
