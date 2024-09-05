@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 01:08:03 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 17:18:25 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:07:32 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ int	file_to_pipe(char *file, t_ppx *ppx)
 	return (1);
 }
 
-int	pipe_to_file(char *file, t_ppx *ppx)
+int	pipe_to_file(char *file, t_ppx *ppx, bool heredoc)
 {
 	int	file_fd;
 
-	file_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (heredoc == true)
+		file_fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		file_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (file_fd == -1)
 		return (perror(file), close(file_fd), close_pipe(ppx), 0);
 	dup2(ppx->pipe_fd[0], STDIN_FILENO);

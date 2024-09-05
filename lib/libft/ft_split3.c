@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 11:52:26 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 11:33:10 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:08:33 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,14 @@ char	*prompt_command(char *result)
 	char	*result_and_str;
 
 	result_and_str = allocate_result(result);
-	str = get_next_line(0);
-	while (str != NULL)
+	if (!result_and_str)
+		return (NULL);
+	while (true)
 	{
+		write(1, "> ", 2);
+		str = get_next_line(0);
+		if (!str)
+			break ;
 		trim_newline(str);
 		if (ft_strchr(str, '\''))
 		{

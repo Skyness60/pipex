@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:45:05 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 16:53:35 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:06:26 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ void	exec_child_last(t_ppx *ppx, char *cmd, char *file, bool heredoc)
 			free(path), ppx_del(&ppx));
 	else if (pid == 0)
 	{
-		if (pipe_to_file(file, ppx, false) == 1 && heredoc == false)
-			return (ft_exec_outfile(path, cmds, ppx, cmd));
-		else if (pipe_to_file(file, ppx, true) == 1 && heredoc == true)
+		if (pipe_to_file(file, ppx, heredoc) == 1)
 			return (ft_exec_outfile(path, cmds, ppx, cmd));
 		else
 			return (free(path), ft_free_strs(cmds), ppx_del(&ppx),
