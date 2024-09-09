@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 01:03:40 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 15:44:28 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/09 09:36:36 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,13 @@ char	**find_paths(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			break ;
+		if (strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			paths = ft_split(envp[i] + 5, ':');
+			return (paths);
+		}
 		i++;
 	}
-	if (!envp[i])
-		return (ft_split(strdup("0"), ' '));
-	paths = ft_split(envp[i] + 5, ':');
+	paths = ft_split("0", ' ');
 	return (paths);
 }

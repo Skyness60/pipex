@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 22:41:47 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 16:48:31 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/09 09:29:14 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include <sys/select.h>
 # include <stdbool.h>
 # include "../lib.h"
+
+typedef unsigned char	t_byte;
 
 int		is_quote(char c);
 int		is_separator(char c, char sep);
@@ -66,4 +68,5 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_itoa(int n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 #endif

@@ -20,6 +20,7 @@ SOURCES_LIBFT = lib/libft/ft_nbrlen_base.c \
 				lib/libft/ft_putstr.c \
 				lib/libft/ft_split.c \
 				lib/libft/ft_split1.c \
+				lib/libft/ft_memcpy.c \
 				lib/libft/ft_split2.c \
 				lib/libft/ft_split3.c \
 				lib/libft/ft_substr.c \
@@ -51,6 +52,7 @@ BONUS_SOURCES =	$(SOURCES_PRINTF) \
 				srcs/bonus/pipex_utils_bonus.c \
 				srcs/bonus/ppx_bonus.c \
 				srcs/bonus/heredoc.c \
+				srcs/bonus/init_bonus.c \
 				srcs/bonus/childs_bonus.c \
 				srcs/bonus/redirection_bonus.c
 

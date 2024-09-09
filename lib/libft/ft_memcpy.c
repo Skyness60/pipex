@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 07:12:51 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/09 09:27:11 by sperron          ###   ########.fr       */
+/*   Created: 2024/09/09 09:27:32 by sperron           #+#    #+#             */
+/*   Updated: 2024/09/09 09:29:08 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t	size;
-	char	*dest;
+	size_t	i;
+	t_byte	*ptsrc;
+	t_byte	*ptdest;
 
-	size = (ft_strlen(s) + 1);
-	dest = malloc(sizeof(char) * size);
-	if (!dest)
-		return (NULL);
-	ft_memcpy(dest, s, size);
-	return (dest);
+	if (dest == src)
+		return (dest);
+	i = 0;
+	ptsrc = (t_byte *)src;
+	ptdest = (t_byte *)dest;
+	while (i < n)
+	{
+		ptdest[i] = ptsrc[i];
+		i++;
+	}
+	return ((void *)ptdest);
 }
-
-// int main(void)
-// {
-//     printf("%s", ft_strdup("test"));
-//     printf("\n");
-//     printf("%s", strdup("test"));
-//     printf("\n");
-//     return (0);
-// }

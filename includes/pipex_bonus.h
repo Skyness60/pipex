@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 22:35:34 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 17:19:46 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/09 05:53:50 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,6 @@ int		middle_cmd(t_ppx **ppx, int i, char **envp, char **av);
 void	creat_here_doc_take_path_exec(char **av, char **envp);
 void	pipe_to_pipe(int pipe_fd_1[2], int pipe_fd_2[2], t_ppx *ppx);
 t_ppx	*last_pip(t_ppx *ppx);
+int		process_arguments(int ac, char **av, char **envp, t_ppx *ppx);
+int		take_path_exec(char **av, char **envp, t_ppx *ppx, int i);
 #endif

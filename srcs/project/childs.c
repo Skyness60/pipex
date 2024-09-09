@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:45:05 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 15:46:49 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/09 09:13:34 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,12 @@ void	exec_child_first(t_ppx *ppx, char *cmd, char *file)
 	else if (pid == 0)
 	{
 		if (file_to_pipe(file, ppx) == 1)
-			return (ft_exec_infile(path, cmds, ppx, cmd));
+			return (ft_exec_infile(path, cmds, ppx, cmd), exit(0));
+		else if (access(file, F_OK) == 0 && access(file, R_OK) == -1)
+			return (ft_free_strs(cmds), free(path), ppx_del(&ppx), exit(1));
 		else
 			return (free(path), ft_free_strs(cmds), ppx_del(&ppx),
-				exit(1));
+				exit(0));
 	}
 	else
 		return (ft_free_strs(cmds), free(path));

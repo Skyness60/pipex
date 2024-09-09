@@ -23,7 +23,6 @@
 
 char	*get_next_line(int fd);
 char	*ft_strjoin_free(char *s1, char *s2);
-int	ft_str_return(char *str);
+int		ft_str_return(char *str);
 void	*ft_str_calloc(size_t elementCount);
-
 #endif

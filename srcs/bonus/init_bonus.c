@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 07:12:51 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/09 09:27:11 by sperron          ###   ########.fr       */
+/*   Created: 2024/09/09 05:22:46 by sperron           #+#    #+#             */
+/*   Updated: 2024/09/09 05:30:50 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/pipex_bonus.h"
 
-char	*ft_strdup(const char *s)
+int	process_arguments(int ac, char **av, char **envp, t_ppx *ppx)
 {
-	size_t	size;
-	char	*dest;
+	int	i;
 
-	size = (ft_strlen(s) + 1);
-	dest = malloc(sizeof(char) * size);
-	if (!dest)
-		return (NULL);
-	ft_memcpy(dest, s, size);
-	return (dest);
+	i = 4;
+	if (ft_strncmp(av[1], "here_doc", 9) == 0 && ac > 5)
+		creat_here_doc_take_path_exec(av, envp);
+	else if (ft_strncmp(av[1], "here_doc", 9) != 0)
+		i = take_path_exec(av, envp, ppx, i);
+	else
+		return (ppx_error(6, av, ac, 0), 1);
+	return (i);
 }
-
-// int main(void)
-// {
-//     printf("%s", ft_strdup("test"));
-//     printf("\n");
-//     printf("%s", strdup("test"));
-//     printf("\n");
-//     return (0);
-// }

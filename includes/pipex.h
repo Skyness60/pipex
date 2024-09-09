@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 22:35:34 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 15:47:18 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/09 05:54:17 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ char	**find_paths(char **envp);
 void	ft_free_strs(char **strs);
 void	exec_child_first(t_ppx *ppx, char *cmd, char *file);
 void	exec_child_last(t_ppx *ppx, char *cmd, char *file);
-int	ppx_error(t_error_code code, char **av, int ac, char *cmd);
+int		ppx_error(t_error_code code, char **av, int ac, char *cmd);
 #endif

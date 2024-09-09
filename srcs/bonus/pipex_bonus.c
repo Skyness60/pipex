@@ -6,7 +6,7 @@
 /*   By: sperron <sperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 22:34:58 by sperron           #+#    #+#             */
-/*   Updated: 2024/09/04 17:54:09 by sperron          ###   ########.fr       */
+/*   Updated: 2024/09/09 05:52:21 by sperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	ppx_error(t_error_code code, char **av, int ac, char *cmd)
 		return (ft_dprintf(2, "pipex: %s: No such file or directory\n",
 				av[1]), 1);
 	else if (code == ERR_ARGS)
-		return (ft_dprintf(2, "pipex: syntax error near unexpected token `%s'\n",
+		return (ft_dprintf(2,
+				"pipex: syntax error near unexpected token `%s'\n",
 				av[ac - 1]), 2);
 	else if (code == ERR_PERMISSION_DENIED)
 		return (ft_dprintf(2, "pipex: %s: Permission denied\n", cmd), 1);
@@ -78,17 +79,13 @@ int	main(int ac, char **av, char **envp)
 	int		exit_status;
 	int		child_status;
 
-	i= 4;
+	i = 4;
+	exit_status = 0;
 	status = 0;
 	if (ac < 5)
 		return (ppx_error(1, av, ac, 0), 2);
 	ppx = NULL;
-	if (ft_strncmp(av[1], "here_doc", 9) == 0 && ac > 5)
-		creat_here_doc_take_path_exec(av, envp);
-	else if (ft_strncmp(av[1], "here_doc", 9) != 0)
-		i = take_path_exec(av, envp, ppx, i);
-	else
-		return (ppx_error(6, av, ac, 0), 1);
+	i = process_arguments(ac, av, envp, ppx);
 	while (i > 2)
 	{
 		wait(&status);
